@@ -66,14 +66,14 @@
   <p class="kicker">02 / All-in-one smart styling</p>
   <h2 class="reveal">Dressed for the day you're actually having.</h2>
   <div class="cards">
-    <article class="ccard reveal"><img src="img/app1.webp" alt="ModaChron app suggesting a winter outfit" loading="lazy"><div><h3>Weather smart</h3><p>Recommendations adapt to current and forecasted weather, so rain and temperature are already handled.</p></div></article>
-    <article class="ccard reveal"><img src="img/app3.webp" alt="ModaChron app showing a fall outfit" loading="lazy"><div><h3>Calendar integration</h3><p>Outfits tailored to your upcoming events. Pre-plan looks for the week, an event or a trip.</p></div></article>
-    <article class="ccard reveal"><img src="img/app2.webp" alt="ModaChron app showing an alternate outfit" loading="lazy"><div><h3>Style inspiration</h3><p>Smart suggestions based on your preferences that still push you to try something new from your closet.</p></div></article>
+    <article class="ccard reveal"><div class="ui-wrap"><div class="phone-ui" data-screen="weather" aria-label="ModaChron app home screen with a weather chip and today's outfit"></div></div><div><h3>Weather smart</h3><p>Recommendations adapt to current and forecasted weather, so rain and temperature are already handled.</p></div></article>
+    <article class="ccard reveal"><div class="ui-wrap"><div class="phone-ui" data-screen="calendar" aria-label="ModaChron calendar screen with an upcoming event and planned outfit"></div></div><div><h3>Calendar integration</h3><p>Outfits tailored to your upcoming events. Pre-plan looks for the week, an event or a trip.</p></div></article>
+    <article class="ccard reveal"><div class="ui-wrap"><div class="phone-ui" data-screen="style" aria-label="ModaChron outfit suggestion with like, refresh and dismiss buttons"></div></div><div><h3>Style inspiration</h3><p>Smart suggestions based on your preferences that still push you to try something new from your closet.</p></div></article>
   </div>
 </section>
 
 <section class="phone-sec">
-  <div class="phone reveal"><img src="img/app4.webp" alt="ModaChron app home screen with the Cozy Fall Stroll outfit" loading="lazy" width="540" height="1169"></div>
+  <div class="phone reveal"><div class="phone-ui" data-screen="home" aria-label="ModaChron home screen showing Today's Perfect Outfit"></div></div>
   <div>
     <p class="kicker">03 / Wear more of what you own</p>
     <h2 class="reveal">No forgotten pieces at the bottom of the closet.</h2>
@@ -85,6 +85,7 @@
   <p class="kicker">04 / Modabot</p>
   <h2 class="reveal">Saw a fit on Instagram? <em>Send it.</em></h2>
   <p class="reveal">Modabot is ModaChron's Instagram shopping assistant. Share a fashion post and get shoppable links for similar items. Think of it as Shazam for fashion, including more affordable alternatives.</p>
+  <div class="phone-ui reveal" data-screen="modabot" aria-label="Modabot turning a shared Instagram post into shoppable item cards"></div>
   <a class="btn btn-ghost" href="https://www.instagram.com/modachron/" target="_blank" rel="noopener">Find us on Instagram</a>
 </section>
 
@@ -172,6 +173,7 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="ui.js"></script>
 <script src="app.js"></script>
 <script type="module" src="rail.js"></script>
 </body>
