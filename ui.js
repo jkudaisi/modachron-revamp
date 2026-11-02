@@ -24,7 +24,7 @@ const ic={
  prof:'<circle cx="12" cy="8" r="4"/><path d="M4 21 Q12 12 20 21"/>',
  x:'<path d="M6 6 L18 18 M18 6 L6 18"/>',redo:'<path d="M5 12 A7 7 0 1 0 8 6.5 M5 4 V9 H10"/>',
  heart:'<path d="M12 20 L4 12 A4.5 4.5 0 0 1 12 6 A4.5 4.5 0 0 1 20 12Z"/>',bm:'<path d="M7 4 H17 V20 L12 16 L7 20Z"/>',
- send:'<path d="M4 12 L20 4 L14 20 L11 13Z"/>',
+
 };
 const svg=(p,cls='')=>`<svg class="ic ${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
 const status=()=>`<div class="sb"><b>9:41</b><span><i></i><i></i><i></i><em></em></span></div>`;
@@ -40,19 +40,19 @@ const screens={
   <div class="wk">${['M','T','W','T','F','S','S'].map((d,i)=>`<span class="${i===2?'on':''}"><small>${d}</small><b>${10+i}</b>${[1,2,4].includes(i)?'<i></i>':''}</span>`).join('')}</div>
   <div class="ev"><span class="bar"></span><div><small>2:00 PM</small><b class="evt">Work meeting</b><em class="evs">Smart casual</em></div></div>
   <div class="mini"><div class="ocimg">${fitHTML(outfits[3])}</div><div><b class="mt">Evening Plans</b><small>Planned outfit</small></div></div>${tabs('cal')}`,
+ shop:()=>`${status()}<header class="hd"><b>ModaShop</b><small>Coming soon</small></header><div class="pages">
+  <div class="pg p0"><div class="grid">${[G.jacket('#FFBB00'),G.sweater('#2f6b47'),G.coat('#2d3440'),G.tee('#d8c7a3'),G.jeans('#3b4a63'),G.sneaker('#2b2b2e')].map((g,i)=>`<div class="cl${i===2?' lst':''}">${g}${i===2?'<span class="badge">Listed</span>':''}</div>`).join('')}</div><p class="cap">Your closet</p></div>
+  <div class="pg p1"><div class="sr"><div class="ocimg"><div class="fl one">${G.coat('#2d3440')}</div></div><div class="oct"><b>Sell Review</b><small>Wool overcoat • Not worn lately</small></div></div><div class="acts"><span>${svg(ic.x)}</span><span class="h sell">Sell</span></div><p class="cap">Keep or sell?</p></div>
+  <div class="pg p2"><div class="sr"><div class="ocimg"><div class="fl one">${G.jacket('#FFBB00')}</div><span class="pick">Picked for your closet</span></div><div class="oct"><b>Varsity jacket</b><small>Goes with pieces you own</small></div></div><span class="offer">Make an offer</span><div class="nt"><b>New offer</b>Accept, decline or counter</div></div>
+  <div class="pg p3"><div class="sold"><span class="chk">✓</span><b>You sold it!</b><small>Next, set up how you get paid.</small><span class="offer">Set up payouts</span></div><div class="nt sm"><b>Shipped</b>Your item is on the way</div></div>
+ </div>${tabs('closet')}`,
  style:()=>`${status()}${greet('Today')}${outfitCard(outfits[1])}${tabs('home')}`,
- modabot:()=>`${status()}<header class="hd chat"><span class="av"><img src="img/moda_white_logo.png" alt=""></span><div><b>Modabot</b><small>Instagram shopping assistant</small></div></header>
-  <div class="msgs"><div class="me post"><div class="ig"><span class="igh"><i></i>shared post</span><div class="igimg">${fitHTML(outfits[0])}</div></div></div>
-  <div class="bm typing"><i></i><i></i><i></i></div>
-  <div class="bm res"><p>Here are similar items:</p><div class="items">
-   ${[[G.jacket('#FFBB00'),'Varsity bomber jacket'],[G.tee('#d8c7a3'),'Graphic oversized tee'],[G.cargo('#55575c'),'Washed cargo pants'],[G.sneaker('#2b2b2e'),'Low-top sneakers']].map(([g,n])=>`<div class="it"><div class="iti">${g}</div><b>${n}</b><span>Shop</span></div>`).join('')}
-  </div></div></div><div class="cin"><span>Share a post...</span>${svg(ic.send)}</div><div class="hb"></div>`,
 };
 document.querySelectorAll('.phone-ui').forEach(el=>{
   const k=el.dataset.screen;el.innerHTML=`<div class="scr s-${k}">${screens[k]()}</div><span class="isl"></span>`;
   el.setAttribute('role','img');
 });
-if(reduced){document.querySelectorAll('.s-modabot').forEach(s=>s.classList.add('done'));return;}
+if(reduced){document.querySelectorAll('.s-shop').forEach(s=>s.dataset.p=2);return;}
 const onView=(el,fn)=>{let id=null;new IntersectionObserver(es=>{const v=es[0].isIntersecting;if(v&&!id)id=fn();if(!v&&id){clearInterval(id);id=null}}).observe(el)};
 const swap=(scr,list,ms,extra)=>{let i=0;return setInterval(()=>{const c=scr.querySelector('.oc');c.classList.add('out');
   setTimeout(()=>{i=(i+1)%list.length;const o=list[i];c.querySelector('.ocimg').innerHTML=fitHTML(o);c.querySelector('.oct b').textContent=o.t;c.querySelector('.oct small').textContent=o.s;extra&&extra(i,c);c.classList.remove('out')},350)},ms)};
@@ -63,5 +63,5 @@ document.querySelectorAll('.s-calendar').forEach(s=>onView(s,()=>{let i=0;return
   setTimeout(()=>{ev.querySelector('small').textContent=e[0];ev.querySelector('.evt').textContent=e[1];ev.querySelector('.evs').textContent=e[2];
   s.querySelector('.mini .ocimg').innerHTML=fitHTML(outfits[e[3]]);s.querySelector('.mt').textContent=outfits[e[3]].t;
   s.querySelectorAll('.wk span').forEach((d,j)=>d.classList.toggle('on',j===[2,2,4,5][i]));ev.classList.remove('out')},300)},2800)}));
-document.querySelectorAll('.s-modabot').forEach(s=>onView(s,()=>{const run=()=>{s.classList.remove('t1','done');void s.offsetWidth;s.classList.add('t1');setTimeout(()=>s.classList.add('done'),1600)};run();return setInterval(run,7000)}));
+document.querySelectorAll('.s-shop').forEach(s=>{s.dataset.p=0;onView(s,()=>{let i=0;return setInterval(()=>{i=(i+1)%4;s.dataset.p=i},2600)})});
 })();
